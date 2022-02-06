@@ -25,9 +25,9 @@ jobs:
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
       - name: Set branch environments
         run: |-
-          echo "ECS_SERVICE=project-prod-service" >> "$GITHUB_ENV"
-          echo "ECS_CLUSTER=project-prod-cluster" >> "$GITHUB_ENV"
-          echo "ECS_TASK=project-prod-task" >> "$GITHUB_ENV"
+          echo "ECS_SERVICE=project-1-service" >> "$GITHUB_ENV"
+          echo "ECS_CLUSTER=project-1-cluster" >> "$GITHUB_ENV"
+          echo "ECS_TASK=project-1-task" >> "$GITHUB_ENV"
           echo "CONTAINER_NAME=project-1-deploy" >> "$GITHUB_ENV"
           echo "AWS_KEY=$AWS_ACCESS_KEY_ID" >> "$GITHUB_ENV"
           echo "AWS_SECRET=$AWS_SECRET_ACCESS_KEY" >> "$GITHUB_ENV"
