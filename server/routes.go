@@ -13,6 +13,12 @@ type Server struct {
 func SetupRoutes() *Server {
 	router := chi.NewRouter()
 	router.Route("/api", func(api chi.Router) {
+		api.Get("/", func(responseWriter http.ResponseWriter, request *http.Request) {
+			_, err := responseWriter.Write([]byte("hello"))
+			if err != nil {
+				return
+			}
+		})
 		api.Post("/text", handler.CountFrequency)
 	})
 	return &Server{router}
