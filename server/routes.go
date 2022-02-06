@@ -14,7 +14,7 @@ func SetupRoutes() *Server {
 	router := chi.NewRouter()
 	router.Route("/api", func(api chi.Router) {
 		api.Get("/", func(responseWriter http.ResponseWriter, request *http.Request) {
-			_, err := responseWriter.Write([]byte("so you are on vivek first deployed server. How are you feeling?"))
+			_, err := responseWriter.Write([]byte("So you are on vivek's first deployed server.\n\n\t you must be feeling lucky"))
 			if err != nil {
 				return
 			}
