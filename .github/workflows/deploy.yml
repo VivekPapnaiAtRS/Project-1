@@ -12,8 +12,8 @@ env:
   AWS_REGION: ap-south-1
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  DEV_AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
-  DEV_AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
+#  DEV_AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
+#  DEV_AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   build-docker-and-deploy:
@@ -26,22 +26,12 @@ jobs:
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
       - name: Set branch environments
         run: |-
-          if [[ "${{github.base_ref}}" == "dev" || "${{github.ref}}" == "refs/heads/dev" ]]; then
-             echo "ECS_SERVICE=yd-dev-service" >> "$GITHUB_ENV"
-             echo "ECS_CLUSTER=yd-dev-cluster" >> "$GITHUB_ENV"
-             echo "ECS_TASK=yourdaily-dev-task" >> "$GITHUB_ENV"
-             echo "CONTAINER_NAME=yd-dev-docker" >> "$GITHUB_ENV"
-             echo "AWS_KEY=$DEV_AWS_ACCESS_KEY_ID" >> "$GITHUB_ENV"
-             echo "AWS_SECRET=$DEV_AWS_SECRET_ACCESS_KEY" >> "$GITHUB_ENV"
-          fi
-          if [[ "${{github.base_ref}}" == "main" || "${{github.ref}}" == "refs/heads/main" ]]; then
-             echo "ECS_SERVICE=yd-prod-service" >> "$GITHUB_ENV"
-             echo "ECS_CLUSTER=yd-prod-cluster" >> "$GITHUB_ENV"
-             echo "ECS_TASK=yd-prod-task" >> "$GITHUB_ENV"
-             echo "CONTAINER_NAME=yd-prod-docker" >> "$GITHUB_ENV"
-             echo "AWS_KEY=$AWS_ACCESS_KEY_ID" >> "$GITHUB_ENV"
-             echo "AWS_SECRET=$AWS_SECRET_ACCESS_KEY" >> "$GITHUB_ENV"
-          fi
+          echo "ECS_SERVICE=project-prod-service" >> "$GITHUB_ENV"
+          echo "ECS_CLUSTER=project-prod-cluster" >> "$GITHUB_ENV"
+          echo "ECS_TASK=project-prod-task" >> "$GITHUB_ENV"
+          echo "CONTAINER_NAME=project-1-deploy" >> "$GITHUB_ENV"
+          echo "AWS_KEY=$AWS_ACCESS_KEY_ID" >> "$GITHUB_ENV"
+          echo "AWS_SECRET=$AWS_SECRET_ACCESS_KEY" >> "$GITHUB_ENV"
       - name: checkout repo
         uses: actions/checkout@v2
       - name: configure aws credentials
